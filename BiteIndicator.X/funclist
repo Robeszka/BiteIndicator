@@ -1,0 +1,11 @@
+_delay: CODE, 708 0 30
+_ISR: CODE, 8 0 178
+_initINT0: CODE, 764 0 12
+_main: CODE, 664 0 44
+_setOSCFrequency: CODE, 190 0 134
+__initialization: CODE, 738 0 4
+_initLEDs: CODE, 752 0 12
+_runHardverTest: CODE, 576 0 88
+i2_setOSCFrequency: CODE, 324 0 134
+_runHardverCheck: CODE, 458 0 118
+Total: 754

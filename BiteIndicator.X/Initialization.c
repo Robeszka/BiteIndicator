@@ -1,21 +1,21 @@
 
 #include "Initialization.h"
 #include "PortDefinitions.h"
-#include "OscDefinitions.h"
+#include "InterruptDefinitions.h"
 
 #include <p18f45k20.h>
 
 void initINT0 ()
 {
-    INTCON2bits.RBPU = 0; //Pull-up resisitor ON
-    INTCONbits.INT0IE = 1; //Enable INT0 interrupt
-    INTCON2bits.INTEDG0 = 0; //Interrupt if falling (0)
-    INTCONbits.GIE = 1;         //Global interrupt enable
-    INTCONbits.INT0IF = 0;      //clear interrupt flag
+    PORTB_Pull_up_Set_Enable; //Pull-up resisitor ON
+    INT0_External_Interrupt_Enable_bit_set; //Enable INT0 interrupt
+    External_Interrupt_0_Edge_Select_bit_set_falling; //Interrupt if falling (0)
+    Global_Interrupt_Enable_bit_set;         //Global interrupt enable
+    INT0_External_Interrupt_Flag_bit_clear;      //clear interrupt flag
 }
 
 void initLEDs ()
 {
-    LED_TRISX = LED_TRISX & 0b11111000;
-    LED_PORTX = 0b00000000;
+    LED_TRISX = LED_TRISX & LED_PINS_IO_SETTER;
+    LED_PORTX = LED_PINS_VALUE_SET_DEFAULT;
 }

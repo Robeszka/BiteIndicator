@@ -17,7 +17,7 @@
 
 #include "OSC.h"
 #include "OscDefinitions.h"
-#include "InterruptDefinition.h"
+#include "InterruptDefinitions.h"
 
 int freqGlobalInt;
 
@@ -26,16 +26,15 @@ int freqGlobalInt;
  */
 int main(int argc, char** argv) {
 
+    frequency startFreq = osc_frequency_2MHz;
+
+    setOSCFrequency(startFreq);
+
     freqGlobalInt = 0;
 
     initLEDs();
 
     initINT0();
-
-    
-    frequency feq = frequ_2;
-
-    setOSCFrequency(feq);
     
     runHardverCheck();
 
@@ -51,9 +50,9 @@ int main(int argc, char** argv) {
 
 void interrupt ISR(void)
 {
-        Global_Interrupt_Enable_bit_clear;
+    Global_Interrupt_Enable_bit_clear;
 
-        if(INT0_Interrupt_Enable_bit && INT0_Interrupt_Flag_bit)
+        if(INT0_External_Interrupt_Enable_bit && INT0_External_Interrupt_Flag_bit)
         {
             if(freqGlobalInt == 5)
             {
@@ -65,10 +64,8 @@ void interrupt ISR(void)
 
             freqGlobalInt++;
 
-            INT0_Interrupt_Flag_bit_clear;
+            INT0_External_Interrupt_Flag_bit_clear;
 
             Global_Interrupt_Enable_bit_set;
         }
 }
-
-

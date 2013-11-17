@@ -1,0 +1,1235 @@
+
+
+Microchip Technology PIC18 LITE Macro Assembler V1.21 build 54009 
+                                                                                               Sun Nov 17 19:34:15 2013
+
+Microchip Technology Omniscient Code Generator (Lite mode) build 54009
+     1                           	processor	18F45K20
+     2                           	fnconf	rparam,??,?,0
+     3                           	opt	pw 120
+     4                           	opt	lm
+     5                           	psect	intcode,global,reloc=2,class=CODE,delta=1
+     6                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     7                           	psect	bssCOMRAM,global,class=COMRAM,space=1,delta=1
+     8                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1
+     9                           	psect	text0,global,reloc=2,class=CODE,delta=1
+    10                           	psect	text1,global,reloc=2,class=CODE,delta=1
+    11                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    12                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    13                           	psect	text4,global,reloc=2,class=CODE,delta=1
+    14                           	psect	text5,global,reloc=2,class=CODE,delta=1
+    15                           	psect	text6,global,reloc=2,class=CODE,delta=1
+    16                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1
+    17                           	psect	rparam,global,class=COMRAM,space=1,delta=1
+    18  0000                     _INTCON2bits	set	4081
+    19  0000                     _INTCONbits	set	4082
+    20  0000                     _OSCCONbits	set	4051
+    21  0000                     _PORTD	set	3971
+    22  0000                     _TRISD	set	3989
+    23                           
+    24 ;; *************** function _ISR *****************
+    25 ;; Defined at:
+    26 ;;		line 52 in file "main.c"
+    27 ;; Parameters:    Size  Location     Type
+    28 ;;		None
+    29 ;; Auto vars:     Size  Location     Type
+    30 ;;		None
+    31 ;; Return value:  Size  Location     Type
+    32 ;;		None               void
+    33 ;; Registers used:
+    34 ;;		None
+    35 ;; Tracked objects:
+    36 ;;		On entry : 0/0
+    37 ;;		On exit  : 0/0
+    38 ;;		Unchanged: 0/0
+    39 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+    40 ;;      Params:         0       0       0       0       0       0       0
+    41 ;;      Locals:         0       0       0       0       0       0       0
+    42 ;;      Temps:         14       0       0       0       0       0       0
+    43 ;;      Totals:        14       0       0       0       0       0       0
+    44 ;;Total ram usage:       14 bytes
+    45 ;; Hardware stack levels used:    1
+    46 ;; This function calls:
+    47 ;;		Nothing
+    48 ;; This function is called by:
+    49 ;;		Interrupt level 2
+    50 ;; This function uses a non-reentrant model
+    51 ;;
+    52                           
+    53                           	psect	intcode
+    54  000008                     __pintcode:
+    55                           	opt stack 0
+    56                           
+    57                           ; #config settings
+    58  000008                     _ISR:
+    59                           	opt stack 28
+    60                           
+    61                           ;incstack = 0
+    62  000008  CFFA F001          	movff	pclath,??_ISR
+    63  00000C  CFFB F002          	movff	pclatu,??_ISR+1
+    64  000010  CFE9 F003          	movff	fsr0l,??_ISR+2
+    65  000014  CFEA F004          	movff	fsr0h,??_ISR+3
+    66  000018  CFE1 F005          	movff	fsr1l,??_ISR+4
+    67  00001C  CFE2 F006          	movff	fsr1h,??_ISR+5
+    68  000020  CFD9 F007          	movff	fsr2l,??_ISR+6
+    69  000024  CFDA F008          	movff	fsr2h,??_ISR+7
+    70  000028  CFF3 F009          	movff	prodl,??_ISR+8
+    71  00002C  CFF4 F00A          	movff	prodh,??_ISR+9
+    72  000030  CFF6 F00B          	movff	tblptrl,??_ISR+10
+    73  000034  CFF7 F00C          	movff	tblptrh,??_ISR+11
+    74  000038  CFF8 F00D          	movff	tblptru,??_ISR+12
+    75  00003C  CFF5 F00E          	movff	tablat,??_ISR+13
+    76  000040  C00E  FFF5         	movff	??_ISR+13,tablat
+    77  000044  C00D  FFF8         	movff	??_ISR+12,tblptru
+    78  000048  C00C  FFF7         	movff	??_ISR+11,tblptrh
+    79  00004C  C00B  FFF6         	movff	??_ISR+10,tblptrl
+    80  000050  C00A  FFF4         	movff	??_ISR+9,prodh
+    81  000054  C009  FFF3         	movff	??_ISR+8,prodl
+    82  000058  C008  FFDA         	movff	??_ISR+7,fsr2h
+    83  00005C  C007  FFD9         	movff	??_ISR+6,fsr2l
+    84  000060  C006  FFE2         	movff	??_ISR+5,fsr1h
+    85  000064  C005  FFE1         	movff	??_ISR+4,fsr1l
+    86  000068  C004  FFEA         	movff	??_ISR+3,fsr0h
+    87  00006C  C003  FFE9         	movff	??_ISR+2,fsr0l
+    88  000070  C002  FFFB         	movff	??_ISR+1,pclatu
+    89  000074  C001  FFFA         	movff	??_ISR,pclath
+    90  000078  0011               	retfie		f
+    91  00007A                     __end_of_ISR:
+    92                           	opt stack 0
+    93  0000                     pclatu	equ	0xFFB
+    94                           pclath	equ	0xFFA
+    95                           tblptru	equ	0xFF8
+    96                           tblptrh	equ	0xFF7
+    97                           tblptrl	equ	0xFF6
+    98                           tablat	equ	0xFF5
+    99                           prodh	equ	0xFF4
+   100                           prodl	equ	0xFF3
+   101                           fsr0h	equ	0xFEA
+   102                           fsr0l	equ	0xFE9
+   103                           fsr1h	equ	0xFE2
+   104                           fsr1l	equ	0xFE1
+   105                           fsr2h	equ	0xFDA
+   106                           fsr2l	equ	0xFD9
+   107                           
+   108                           	psect	cinit
+   109  00021C                     __pcinit:
+   110                           	opt stack 0
+   111  00021C                     start_initialization:
+   112                           	opt stack 0
+   113  00021C                     __initialization:
+   114                           	opt stack 0
+   115                           
+   116                           ; Clear objects allocated to COMRAM (2 bytes)
+   117  00021C  6A1D               	clrf	(__pbssCOMRAM+1)& (0+255),c
+   118  00021E  6A1C               	clrf	__pbssCOMRAM& (0+255),c
+   119  000220                     end_of_initialization:
+   120                           	opt stack 0
+   121  000220                     __end_of__initialization:
+   122                           	opt stack 0
+   123  000220  0E00               	movlw	low (__Lmediumconst shr (0+16))
+   124  000222  6EF8               	movwf	tblptru,c
+   125  000224  0100               	movlb	0
+   126  000226  EFE9  F000         	goto	_main	;jump to C main() function
+   127                           pclatu	equ	0xFFB
+   128                           pclath	equ	0xFFA
+   129                           tblptru	equ	0xFF8
+   130                           tblptrh	equ	0xFF7
+   131                           tblptrl	equ	0xFF6
+   132                           tablat	equ	0xFF5
+   133                           prodh	equ	0xFF4
+   134                           prodl	equ	0xFF3
+   135                           fsr0h	equ	0xFEA
+   136                           fsr0l	equ	0xFE9
+   137                           fsr1h	equ	0xFE2
+   138                           fsr1l	equ	0xFE1
+   139                           fsr2h	equ	0xFDA
+   140                           fsr2l	equ	0xFD9
+   141                           
+   142                           	psect	bssCOMRAM
+   143  00001C                     __pbssCOMRAM:
+   144                           	opt stack 0
+   145  00001C                     _freqGlobalInt:
+   146                           	opt stack 0
+   147  00001C                     	ds	2
+   148                           pclatu	equ	0xFFB
+   149                           pclath	equ	0xFFA
+   150                           tblptru	equ	0xFF8
+   151                           tblptrh	equ	0xFF7
+   152                           tblptrl	equ	0xFF6
+   153                           tablat	equ	0xFF5
+   154                           prodh	equ	0xFF4
+   155                           prodl	equ	0xFF3
+   156                           fsr0h	equ	0xFEA
+   157                           fsr0l	equ	0xFE9
+   158                           fsr1h	equ	0xFE2
+   159                           fsr1l	equ	0xFE1
+   160                           fsr2h	equ	0xFDA
+   161                           fsr2l	equ	0xFD9
+   162                           
+   163                           	psect	cstackCOMRAM
+   164  000001                     __pcstackCOMRAM:
+   165                           	opt stack 0
+   166  000001                     ??_ISR:
+   167                           
+   168                           ; 0 bytes @ 0x0
+   169  000001                     	ds	14
+   170  00000F                     ?_setOSCFrequency:
+   171                           	opt stack 0
+   172  00000F                     delay@delay:
+   173                           	opt stack 0
+   174  00000F                     setOSCFrequency@frequenc:
+   175                           	opt stack 0
+   176                           
+   177                           ; 2 bytes @ 0xE
+   178  00000F                     	ds	2
+   179  000011                     setOSCFrequency@ii:
+   180                           	opt stack 0
+   181  000011                     runHardverCheck@helper:
+   182                           	opt stack 0
+   183  000011                     runHardverTest@helper:
+   184                           	opt stack 0
+   185                           
+   186                           ; 2 bytes @ 0x10
+   187  000011                     	ds	2
+   188  000013                     runHardverCheck@helper_29:
+   189                           	opt stack 0
+   190  000013                     runHardverTest@helper_32:
+   191                           	opt stack 0
+   192                           
+   193                           ; 2 bytes @ 0x12
+   194  000013                     	ds	2
+   195  000015                     
+   196                           ; 2 bytes @ 0x14
+   197  000015                     	ds	2
+   198  000017                     
+   199                           ; 3 bytes @ 0x16
+   200  000017                     	ds	3
+   201  00001A                     ??_main:
+   202                           
+   203                           ; 0 bytes @ 0x19
+   204  00001A                     	ds	1
+   205  00001B                     main@startFreq:
+   206                           	opt stack 0
+   207                           
+   208                           ; 1 bytes @ 0x1A
+   209  00001B                     	ds	1
+   210                           pclatu	equ	0xFFB
+   211                           pclath	equ	0xFFA
+   212                           tblptru	equ	0xFF8
+   213                           tblptrh	equ	0xFF7
+   214                           tblptrl	equ	0xFF6
+   215                           tablat	equ	0xFF5
+   216                           prodh	equ	0xFF4
+   217                           prodl	equ	0xFF3
+   218                           fsr0h	equ	0xFEA
+   219                           fsr0l	equ	0xFE9
+   220                           fsr1h	equ	0xFE2
+   221                           fsr1l	equ	0xFE1
+   222                           fsr2h	equ	0xFDA
+   223                           fsr2l	equ	0xFD9
+   224                           
+   225 ;;
+   226 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+   227 ;;
+   228 ;; *************** function _main *****************
+   229 ;; Defined at:
+   230 ;;		line 27 in file "main.c"
+   231 ;; Parameters:    Size  Location     Type
+   232 ;;  argc            2   20[COMRAM] int 
+   233 ;;  argv            3   22[COMRAM] PTR PTR unsigned char 
+   234 ;; Auto vars:     Size  Location     Type
+   235 ;;  startFreq       1   26[COMRAM] enum E4511
+   236 ;; Return value:  Size  Location     Type
+   237 ;;                  2   20[COMRAM] int 
+   238 ;; Registers used:
+   239 ;;		wreg, fsr0l, fsr0h, fsr1l, fsr1h, fsr1l, fsr1h, fsr2l, fsr2h, status,2, status,0, pclat, btemp, btemp+1, btemp+2, bt
+      +emp+3, btemp+4, btemp+5, btemp+6, btemp+7, tosl, structret, tblptrl, tblptrh, tblptru, prodl, prodh, bsr, cstack
+   240 ;; Tracked objects:
+   241 ;;		On entry : 0/0
+   242 ;;		On exit  : 0/0
+   243 ;;		Unchanged: 0/0
+   244 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   245 ;;      Params:         5       0       0       0       0       0       0
+   246 ;;      Locals:         1       0       0       0       0       0       0
+   247 ;;      Temps:          1       0       0       0       0       0       0
+   248 ;;      Totals:         7       0       0       0       0       0       0
+   249 ;;Total ram usage:        7 bytes
+   250 ;; Hardware stack levels required when called:    3
+   251 ;; This function calls:
+   252 ;;		_runHardverCheck
+   253 ;;		_runHardverTest
+   254 ;;		_initINT0
+   255 ;;		_initLEDs
+   256 ;;		_setOSCFrequency
+   257 ;; This function is called by:
+   258 ;;		Startup code after reset
+   259 ;; This function uses a non-reentrant model
+   260 ;;
+   261                           
+   262                           	psect	text0
+   263  0001D2                     __ptext0:
+   264                           	opt stack 0
+   265  0001D2                     _main:
+   266                           	opt stack 28
+   267                           
+   268                           ;main.c: 29: frequency startFreq = osc_frequency_2MHz;
+   269                           
+   270                           ;incstack = 0
+   271                           ;incstack = 0
+   272  0001D2  6E1A               	movwf	??_main& (0+255),c
+   273  0001D4  0E03               	movlw	3
+   274  0001D6  6E1B               	movwf	main@startFreq,c
+   275  0001D8  501A               	movf	??_main& (0+255),w,c
+   276                           
+   277                           ;main.c: 31: setOSCFrequency(startFreq);
+   278  0001DA  C01B  F00F         	movff	main@startFreq,?_setOSCFrequency
+   279  0001DE  6A10               	clrf	?_setOSCFrequency+1,c
+   280  0001E0  EC3F  F000         	call	_setOSCFrequency	;wreg free
+   281                           
+   282                           ;main.c: 33: freqGlobalInt = 0;
+   283  0001E4  0E00               	movlw	0
+   284  0001E6  6E1D               	movwf	_freqGlobalInt+1,c
+   285  0001E8  0E00               	movlw	0
+   286  0001EA  6E1C               	movwf	_freqGlobalInt,c
+   287                           
+   288                           ;main.c: 35: initLEDs();
+   289  0001EC  EC15  F001         	call	_initLEDs	;wreg free
+   290                           
+   291                           ;main.c: 37: initINT0();
+   292  0001F0  EC1B  F001         	call	_initINT0	;wreg free
+   293                           
+   294                           ;main.c: 39: runHardverCheck();
+   295  0001F4  EC82  F000         	call	_runHardverCheck	;wreg free
+   296  0001F8                     l747:
+   297                           
+   298                           ;main.c: 42: {
+   299                           ;main.c: 44: runHardverTest();
+   300  0001F8  ECBD  F000         	call	_runHardverTest	;wreg free
+   301  0001FC  D7FD               	goto	l747
+   302  0001FE                     __end_of_main:
+   303                           	opt stack 0
+   304                           pclatu	equ	0xFFB
+   305                           pclath	equ	0xFFA
+   306                           tblptru	equ	0xFF8
+   307                           tblptrh	equ	0xFF7
+   308                           tblptrl	equ	0xFF6
+   309                           tablat	equ	0xFF5
+   310                           prodh	equ	0xFF4
+   311                           prodl	equ	0xFF3
+   312                           fsr0h	equ	0xFEA
+   313                           fsr0l	equ	0xFE9
+   314                           fsr1h	equ	0xFE2
+   315                           fsr1l	equ	0xFE1
+   316                           fsr2h	equ	0xFDA
+   317                           fsr2l	equ	0xFD9
+   318                           
+   319 ;; *************** function _setOSCFrequency *****************
+   320 ;; Defined at:
+   321 ;;		line 6 in file "OSC.c"
+   322 ;; Parameters:    Size  Location     Type
+   323 ;;  frequenc        2   14[COMRAM] int 
+   324 ;; Auto vars:     Size  Location     Type
+   325 ;;  ii              1   16[COMRAM] enum E4319
+   326 ;; Return value:  Size  Location     Type
+   327 ;;		None               void
+   328 ;; Registers used:
+   329 ;;		wreg, status,2, status,0
+   330 ;; Tracked objects:
+   331 ;;		On entry : 0/0
+   332 ;;		On exit  : 0/0
+   333 ;;		Unchanged: 0/0
+   334 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   335 ;;      Params:         2       0       0       0       0       0       0
+   336 ;;      Locals:         1       0       0       0       0       0       0
+   337 ;;      Temps:          0       0       0       0       0       0       0
+   338 ;;      Totals:         3       0       0       0       0       0       0
+   339 ;;Total ram usage:        3 bytes
+   340 ;; Hardware stack levels used:    1
+   341 ;; Hardware stack levels required when called:    1
+   342 ;; This function calls:
+   343 ;;		Nothing
+   344 ;; This function is called by:
+   345 ;;		_main
+   346 ;; This function uses a non-reentrant model
+   347 ;;
+   348                           
+   349                           	psect	text1
+   350  00007E                     __ptext1:
+   351                           	opt stack 0
+   352  00007E                     _setOSCFrequency:
+   353                           	opt stack 29
+   354                           
+   355                           ;OSC.c: 7: frequency ii = frequenc;
+   356                           
+   357                           ;incstack = 0
+   358                           ;incstack = 0
+   359  00007E  C00F  F011         	movff	setOSCFrequency@frequenc,setOSCFrequency@ii
+   360                           
+   361                           ;OSC.c: 9: switch(ii)
+   362  000082  D026               	goto	l765
+   363  000084                     l66:
+   364                           
+   365                           ;OSC.c: 12: {
+   366                           ;OSC.c: 13: OSCCONbits.IRCF = 0b111;
+   367  000084  88D3               	bsf	4051,4,c	;volatile
+   368  000086  8AD3               	bsf	4051,5,c	;volatile
+   369  000088  8CD3               	bsf	4051,6,c	;volatile
+   370                           
+   371                           ;OSC.c: 14: }break;
+   372  00008A  0012               	return	
+   373  00008C                     l751:
+   374                           
+   375                           ;OSC.c: 17: {
+   376                           ;OSC.c: 18: OSCCONbits.IRCF = 0b110;
+   377  00008C  50D3               	movf	4051,w,c	;volatile
+   378  00008E  0B8F               	andlw	-113
+   379  000090  0960               	iorlw	96
+   380  000092  6ED3               	movwf	4051,c	;volatile
+   381                           
+   382                           ;OSC.c: 19: }break;
+   383  000094  0012               	return	
+   384  000096                     l753:
+   385                           
+   386                           ;OSC.c: 22: {
+   387                           ;OSC.c: 23: OSCCONbits.IRCF = 0b101;
+   388  000096  50D3               	movf	4051,w,c	;volatile
+   389  000098  0B8F               	andlw	-113
+   390  00009A  0950               	iorlw	80
+   391  00009C  6ED3               	movwf	4051,c	;volatile
+   392                           
+   393                           ;OSC.c: 24: }break;
+   394  00009E  0012               	return	
+   395  0000A0                     l755:
+   396                           
+   397                           ;OSC.c: 27: {
+   398                           ;OSC.c: 28: OSCCONbits.IRCF = 0b100;
+   399  0000A0  50D3               	movf	4051,w,c	;volatile
+   400  0000A2  0B8F               	andlw	-113
+   401  0000A4  0940               	iorlw	64
+   402  0000A6  6ED3               	movwf	4051,c	;volatile
+   403                           
+   404                           ;OSC.c: 29: }break;
+   405  0000A8  0012               	return	
+   406  0000AA                     l757:
+   407                           
+   408                           ;OSC.c: 32: {
+   409                           ;OSC.c: 33: OSCCONbits.IRCF = 0b011;
+   410  0000AA  50D3               	movf	4051,w,c	;volatile
+   411  0000AC  0B8F               	andlw	-113
+   412  0000AE  0930               	iorlw	48
+   413  0000B0  6ED3               	movwf	4051,c	;volatile
+   414                           
+   415                           ;OSC.c: 34: }break;
+   416  0000B2  0012               	return	
+   417  0000B4                     l759:
+   418                           
+   419                           ;OSC.c: 37: {
+   420                           ;OSC.c: 38: OSCCONbits.IRCF = 0b010;
+   421  0000B4  50D3               	movf	4051,w,c	;volatile
+   422  0000B6  0B8F               	andlw	-113
+   423  0000B8  0920               	iorlw	32
+   424  0000BA  6ED3               	movwf	4051,c	;volatile
+   425                           
+   426                           ;OSC.c: 39: }break;
+   427  0000BC  0012               	return	
+   428  0000BE                     l761:
+   429                           
+   430                           ;OSC.c: 42: {
+   431                           ;OSC.c: 43: OSCCONbits.IRCF = 0b001;
+   432  0000BE  50D3               	movf	4051,w,c	;volatile
+   433  0000C0  0B8F               	andlw	-113
+   434  0000C2  0910               	iorlw	16
+   435  0000C4  6ED3               	movwf	4051,c	;volatile
+   436                           
+   437                           ;OSC.c: 44: }break;
+   438  0000C6  0012               	return	
+   439  0000C8                     l74:
+   440                           
+   441                           ;OSC.c: 47: {
+   442                           ;OSC.c: 48: OSCCONbits.IRCF = 0b000;
+   443  0000C8  98D3               	bcf	4051,4,c	;volatile
+   444  0000CA  9AD3               	bcf	4051,5,c	;volatile
+   445  0000CC  9CD3               	bcf	4051,6,c	;volatile
+   446                           
+   447                           ;OSC.c: 49: }break;
+   448  0000CE  0012               	return	
+   449  0000D0                     l765:
+   450  0000D0  5011               	movf	setOSCFrequency@ii,w,c
+   451                           
+   452                           ; Switch size 1, requested type "space"
+   453                           ; Number of cases is 8, Range of values is 0 to 7
+   454                           ; switch strategies available:
+   455                           ; Name         Instructions Cycles
+   456                           ; simple_byte           25    13 (average)
+   457                           ;	Chosen strategy is simple_byte
+   458  0000D2  0A00               	xorlw	0	; case 0
+   459  0000D4  B4D8               	btfsc	status,2,c
+   460  0000D6  D7D6               	goto	l66
+   461  0000D8  0A01               	xorlw	1	; case 1
+   462  0000DA  B4D8               	btfsc	status,2,c
+   463  0000DC  D7D7               	goto	l751
+   464  0000DE  0A03               	xorlw	3	; case 2
+   465  0000E0  B4D8               	btfsc	status,2,c
+   466  0000E2  D7D9               	goto	l753
+   467  0000E4  0A01               	xorlw	1	; case 3
+   468  0000E6  B4D8               	btfsc	status,2,c
+   469  0000E8  D7DB               	goto	l755
+   470  0000EA  0A07               	xorlw	7	; case 4
+   471  0000EC  B4D8               	btfsc	status,2,c
+   472  0000EE  D7DD               	goto	l757
+   473  0000F0  0A01               	xorlw	1	; case 5
+   474  0000F2  B4D8               	btfsc	status,2,c
+   475  0000F4  D7DF               	goto	l759
+   476  0000F6  0A03               	xorlw	3	; case 6
+   477  0000F8  B4D8               	btfsc	status,2,c
+   478  0000FA  D7E1               	goto	l761
+   479  0000FC  0A01               	xorlw	1	; case 7
+   480  0000FE  A4D8               	btfss	status,2,c
+   481  000100  0012               	return	
+   482  000102  D7E2               	goto	l74
+   483  000104                     __end_of_setOSCFrequency:
+   484                           	opt stack 0
+   485                           pclatu	equ	0xFFB
+   486                           pclath	equ	0xFFA
+   487                           tblptru	equ	0xFF8
+   488                           tblptrh	equ	0xFF7
+   489                           tblptrl	equ	0xFF6
+   490                           tablat	equ	0xFF5
+   491                           prodh	equ	0xFF4
+   492                           prodl	equ	0xFF3
+   493                           fsr0h	equ	0xFEA
+   494                           fsr0l	equ	0xFE9
+   495                           fsr1h	equ	0xFE2
+   496                           fsr1l	equ	0xFE1
+   497                           fsr2h	equ	0xFDA
+   498                           fsr2l	equ	0xFD9
+   499                           status	equ	0xFD8
+   500                           
+   501 ;; *************** function _initLEDs *****************
+   502 ;; Defined at:
+   503 ;;		line 18 in file "Initialization.c"
+   504 ;; Parameters:    Size  Location     Type
+   505 ;;		None
+   506 ;; Auto vars:     Size  Location     Type
+   507 ;;		None
+   508 ;; Return value:  Size  Location     Type
+   509 ;;		None               void
+   510 ;; Registers used:
+   511 ;;		wreg, status,2, status,0
+   512 ;; Tracked objects:
+   513 ;;		On entry : 0/0
+   514 ;;		On exit  : 0/0
+   515 ;;		Unchanged: 0/0
+   516 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   517 ;;      Params:         0       0       0       0       0       0       0
+   518 ;;      Locals:         0       0       0       0       0       0       0
+   519 ;;      Temps:          0       0       0       0       0       0       0
+   520 ;;      Totals:         0       0       0       0       0       0       0
+   521 ;;Total ram usage:        0 bytes
+   522 ;; Hardware stack levels used:    1
+   523 ;; Hardware stack levels required when called:    1
+   524 ;; This function calls:
+   525 ;;		Nothing
+   526 ;; This function is called by:
+   527 ;;		_main
+   528 ;; This function uses a non-reentrant model
+   529 ;;
+   530                           
+   531                           	psect	text2
+   532  00022A                     __ptext2:
+   533                           	opt stack 0
+   534  00022A                     _initLEDs:
+   535                           	opt stack 29
+   536                           
+   537                           ;Initialization.c: 19: TRISD = TRISD & 0b11111000;
+   538                           
+   539                           ;incstack = 0
+   540                           ;incstack = 0
+   541  00022A  5095               	movf	3989,w,c	;volatile
+   542  00022C  0BF8               	andlw	248
+   543  00022E  6E95               	movwf	3989,c	;volatile
+   544                           
+   545                           ;Initialization.c: 20: PORTD = 0b00000000;
+   546  000230  0E00               	movlw	0
+   547  000232  6E83               	movwf	3971,c	;volatile
+   548  000234  0012               	return	
+   549  000236                     __end_of_initLEDs:
+   550                           	opt stack 0
+   551                           pclatu	equ	0xFFB
+   552                           pclath	equ	0xFFA
+   553                           tblptru	equ	0xFF8
+   554                           tblptrh	equ	0xFF7
+   555                           tblptrl	equ	0xFF6
+   556                           tablat	equ	0xFF5
+   557                           prodh	equ	0xFF4
+   558                           prodl	equ	0xFF3
+   559                           fsr0h	equ	0xFEA
+   560                           fsr0l	equ	0xFE9
+   561                           fsr1h	equ	0xFE2
+   562                           fsr1l	equ	0xFE1
+   563                           fsr2h	equ	0xFDA
+   564                           fsr2l	equ	0xFD9
+   565                           status	equ	0xFD8
+   566                           
+   567 ;; *************** function _initINT0 *****************
+   568 ;; Defined at:
+   569 ;;		line 9 in file "Initialization.c"
+   570 ;; Parameters:    Size  Location     Type
+   571 ;;		None
+   572 ;; Auto vars:     Size  Location     Type
+   573 ;;		None
+   574 ;; Return value:  Size  Location     Type
+   575 ;;		None               void
+   576 ;; Registers used:
+   577 ;;		None
+   578 ;; Tracked objects:
+   579 ;;		On entry : 0/0
+   580 ;;		On exit  : 0/0
+   581 ;;		Unchanged: 0/0
+   582 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   583 ;;      Params:         0       0       0       0       0       0       0
+   584 ;;      Locals:         0       0       0       0       0       0       0
+   585 ;;      Temps:          0       0       0       0       0       0       0
+   586 ;;      Totals:         0       0       0       0       0       0       0
+   587 ;;Total ram usage:        0 bytes
+   588 ;; Hardware stack levels used:    1
+   589 ;; Hardware stack levels required when called:    1
+   590 ;; This function calls:
+   591 ;;		Nothing
+   592 ;; This function is called by:
+   593 ;;		_main
+   594 ;; This function uses a non-reentrant model
+   595 ;;
+   596                           
+   597                           	psect	text3
+   598  000236                     __ptext3:
+   599                           	opt stack 0
+   600  000236                     _initINT0:
+   601                           	opt stack 29
+   602                           
+   603                           ;Initialization.c: 10: INTCON2bits.RBPU = 0;
+   604                           
+   605                           ;incstack = 0
+   606                           ;incstack = 0
+   607  000236  9EF1               	bcf	intcon2,7,c	;volatile
+   608                           
+   609                           ;Initialization.c: 11: INTCONbits.INT0IE = 1;
+   610  000238  88F2               	bsf	intcon,4,c	;volatile
+   611                           
+   612                           ;Initialization.c: 12: INTCON2bits.INTEDG0 = 0;
+   613  00023A  9CF1               	bcf	intcon2,6,c	;volatile
+   614                           
+   615                           ;Initialization.c: 13: INTCONbits.GIE = 1;
+   616  00023C  8EF2               	bsf	intcon,7,c	;volatile
+   617                           
+   618                           ;Initialization.c: 14: INTCONbits.INT0IF = 0;
+   619  00023E  92F2               	bcf	intcon,1,c	;volatile
+   620  000240  0012               	return	
+   621  000242                     __end_of_initINT0:
+   622                           	opt stack 0
+   623                           pclatu	equ	0xFFB
+   624                           pclath	equ	0xFFA
+   625                           tblptru	equ	0xFF8
+   626                           tblptrh	equ	0xFF7
+   627                           tblptrl	equ	0xFF6
+   628                           tablat	equ	0xFF5
+   629                           prodh	equ	0xFF4
+   630                           prodl	equ	0xFF3
+   631                           intcon	equ	0xFF2
+   632                           intcon2	equ	0xFF1
+   633                           fsr0h	equ	0xFEA
+   634                           fsr0l	equ	0xFE9
+   635                           fsr1h	equ	0xFE2
+   636                           fsr1l	equ	0xFE1
+   637                           fsr2h	equ	0xFDA
+   638                           fsr2l	equ	0xFD9
+   639                           status	equ	0xFD8
+   640                           
+   641 ;; *************** function _runHardverTest *****************
+   642 ;; Defined at:
+   643 ;;		line 44 in file "HardverTest.c"
+   644 ;; Parameters:    Size  Location     Type
+   645 ;;		None
+   646 ;; Auto vars:     Size  Location     Type
+   647 ;;  helper          2   18[COMRAM] int 
+   648 ;;  helper          2   16[COMRAM] int 
+   649 ;; Return value:  Size  Location     Type
+   650 ;;		None               void
+   651 ;; Registers used:
+   652 ;;		wreg, status,2, status,0, cstack
+   653 ;; Tracked objects:
+   654 ;;		On entry : 0/0
+   655 ;;		On exit  : 0/0
+   656 ;;		Unchanged: 0/0
+   657 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   658 ;;      Params:         0       0       0       0       0       0       0
+   659 ;;      Locals:         4       0       0       0       0       0       0
+   660 ;;      Temps:          0       0       0       0       0       0       0
+   661 ;;      Totals:         4       0       0       0       0       0       0
+   662 ;;Total ram usage:        4 bytes
+   663 ;; Hardware stack levels used:    1
+   664 ;; Hardware stack levels required when called:    2
+   665 ;; This function calls:
+   666 ;;		_delay
+   667 ;; This function is called by:
+   668 ;;		_main
+   669 ;; This function uses a non-reentrant model
+   670 ;;
+   671                           
+   672                           	psect	text4
+   673  00017A                     __ptext4:
+   674                           	opt stack 0
+   675  00017A                     _runHardverTest:
+   676                           	opt stack 28
+   677                           
+   678                           ;HardverTest.c: 45: TRISD = TRISD & 0b00000000;
+   679                           
+   680                           ;incstack = 0
+   681                           ;incstack = 0
+   682  00017A  0E00               	movlw	0
+   683  00017C  6E95               	movwf	3989,c	;volatile
+   684                           
+   685                           ;HardverTest.c: 47: PORTD = 1;
+   686  00017E  0E01               	movlw	1
+   687  000180  6E83               	movwf	3971,c	;volatile
+   688                           
+   689                           ;HardverTest.c: 49: for(int helper = 0; helper <= 6; helper++)
+   690  000182  0E00               	movlw	0
+   691  000184  6E12               	movwf	runHardverTest@helper+1,c
+   692  000186  0E00               	movlw	0
+   693  000188  6E11               	movwf	runHardverTest@helper,c
+   694  00018A  5012               	movf	runHardverTest@helper+1,w,c
+   695  00018C  0A80               	xorlw	128
+   696  00018E  0F80               	addlw	-128
+   697  000190  0E07               	movlw	7
+   698  000192  B4D8               	btfsc	status,2,c
+   699  000194  5C11               	subwf	runHardverTest@helper,w,c
+   700  000196  B0D8               	btfsc	status,0,c
+   701  000198  D008               	goto	l715
+   702                           
+   703                           ;HardverTest.c: 50: {
+   704                           ;HardverTest.c: 51: delay();
+   705  00019A  ECFF  F000         	call	_delay	;wreg free
+   706                           
+   707                           ;HardverTest.c: 53: PORTD = PORTD << 1;
+   708  00019E  5083               	movf	3971,w,c	;volatile
+   709  0001A0  2483               	addwf	3971,w,c	;volatile
+   710  0001A2  6E83               	movwf	3971,c	;volatile
+   711  0001A4  4A11               	infsnz	runHardverTest@helper,f,c
+   712  0001A6  2A12               	incf	runHardverTest@helper+1,f,c
+   713  0001A8  D7F0               	goto	L1
+   714  0001AA                     l715:
+   715                           
+   716                           ;HardverTest.c: 55: }
+   717                           ;HardverTest.c: 57: for(int helper = 0; helper <= 6; helper++)
+   718  0001AA  0E00               	movlw	0
+   719  0001AC  6E14               	movwf	runHardverTest@helper_32+1,c
+   720  0001AE  0E00               	movlw	0
+   721  0001B0  6E13               	movwf	runHardverTest@helper_32,c
+   722  0001B2  5014               	movf	runHardverTest@helper_32+1,w,c
+   723  0001B4  0A80               	xorlw	128
+   724  0001B6  0F80               	addlw	-128
+   725  0001B8  0E07               	movlw	7
+   726  0001BA  B4D8               	btfsc	status,2,c
+   727  0001BC  5C13               	subwf	runHardverTest@helper_32,w,c
+   728  0001BE  B0D8               	btfsc	status,0,c
+   729  0001C0  0012               	return	
+   730                           
+   731                           ;HardverTest.c: 58: {
+   732                           ;HardverTest.c: 59: delay();
+   733  0001C2  ECFF  F000         	call	_delay	;wreg free
+   734                           
+   735                           ;HardverTest.c: 61: PORTD = PORTD >> 1;
+   736  0001C6  90D8               	bcf	status,0,c
+   737  0001C8  3083               	rrcf	3971,w,c	;volatile
+   738  0001CA  6E83               	movwf	3971,c	;volatile
+   739  0001CC  4A13               	infsnz	runHardverTest@helper_32,f,c
+   740  0001CE  2A14               	incf	runHardverTest@helper_32+1,f,c
+   741  0001D0  D7F0               	goto	L2
+   742  0001D2                     __end_of_runHardverTest:
+   743                           	opt stack 0
+   744                           pclatu	equ	0xFFB
+   745                           pclath	equ	0xFFA
+   746                           tblptru	equ	0xFF8
+   747                           tblptrh	equ	0xFF7
+   748                           tblptrl	equ	0xFF6
+   749                           tablat	equ	0xFF5
+   750                           prodh	equ	0xFF4
+   751                           prodl	equ	0xFF3
+   752                           intcon	equ	0xFF2
+   753                           intcon2	equ	0xFF1
+   754                           fsr0h	equ	0xFEA
+   755                           fsr0l	equ	0xFE9
+   756                           fsr1h	equ	0xFE2
+   757                           fsr1l	equ	0xFE1
+   758                           fsr2h	equ	0xFDA
+   759                           fsr2l	equ	0xFD9
+   760                           status	equ	0xFD8
+   761                           
+   762 ;; *************** function _runHardverCheck *****************
+   763 ;; Defined at:
+   764 ;;		line 9 in file "HardverTest.c"
+   765 ;; Parameters:    Size  Location     Type
+   766 ;;		None
+   767 ;; Auto vars:     Size  Location     Type
+   768 ;;  helper          2   18[COMRAM] int 
+   769 ;;  helper          2   16[COMRAM] int 
+   770 ;; Return value:  Size  Location     Type
+   771 ;;		None               void
+   772 ;; Registers used:
+   773 ;;		wreg, fsr0l, fsr0h, fsr1l, fsr1h, fsr1l, fsr1h, fsr2l, fsr2h, status,2, status,0, pclat, btemp, btemp+1, btemp+2, bt
+      +emp+3, btemp+4, btemp+5, btemp+6, btemp+7, tosl, structret, tblptrl, tblptrh, tblptru, prodl, prodh, bsr, cstack
+   774 ;; Tracked objects:
+   775 ;;		On entry : 0/0
+   776 ;;		On exit  : 0/0
+   777 ;;		Unchanged: 0/0
+   778 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   779 ;;      Params:         0       0       0       0       0       0       0
+   780 ;;      Locals:         4       0       0       0       0       0       0
+   781 ;;      Temps:          0       0       0       0       0       0       0
+   782 ;;      Totals:         4       0       0       0       0       0       0
+   783 ;;Total ram usage:        4 bytes
+   784 ;; Hardware stack levels used:    1
+   785 ;; Hardware stack levels required when called:    2
+   786 ;; This function calls:
+   787 ;;		_delay
+   788 ;; This function is called by:
+   789 ;;		_main
+   790 ;; This function uses a non-reentrant model
+   791 ;;
+   792                           
+   793                           	psect	text5
+   794  000104                     __ptext5:
+   795                           	opt stack 0
+   796  000104                     _runHardverCheck:
+   797                           	opt stack 28
+   798                           
+   799                           ;HardverTest.c: 10: PORTD = 0b00000001;
+   800                           
+   801                           ;incstack = 0
+   802                           ;incstack = 0
+   803  000104  0E01               	movlw	1
+   804  000106  6E83               	movwf	3971,c	;volatile
+   805                           
+   806                           ;HardverTest.c: 12: for(int helper = 0; helper <= 1 ; helper++)
+   807  000108  0E00               	movlw	0
+   808  00010A  6E12               	movwf	runHardverCheck@helper+1,c
+   809  00010C  0E00               	movlw	0
+   810  00010E  6E11               	movwf	runHardverCheck@helper,c
+   811  000110  5012               	movf	runHardverCheck@helper+1,w,c
+   812  000112  0A80               	xorlw	128
+   813  000114  0F80               	addlw	-128
+   814  000116  0E02               	movlw	2
+   815  000118  B4D8               	btfsc	status,2,c
+   816  00011A  5C11               	subwf	runHardverCheck@helper,w,c
+   817  00011C  B0D8               	btfsc	status,0,c
+   818  00011E  D008               	goto	l665
+   819                           
+   820                           ;HardverTest.c: 13: {
+   821                           ;HardverTest.c: 14: delay();
+   822  000120  ECFF  F000         	call	_delay	;wreg free
+   823                           
+   824                           ;HardverTest.c: 16: PORTD = PORTD << 1;
+   825  000124  5083               	movf	3971,w,c	;volatile
+   826  000126  2483               	addwf	3971,w,c	;volatile
+   827  000128  6E83               	movwf	3971,c	;volatile
+   828  00012A  4A11               	infsnz	runHardverCheck@helper,f,c
+   829  00012C  2A12               	incf	runHardverCheck@helper+1,f,c
+   830  00012E  D7F0               	goto	L3
+   831  000130                     l665:
+   832                           
+   833                           ;HardverTest.c: 17: }
+   834                           ;HardverTest.c: 19: for(int helper = 0; helper <= 1 ; helper++)
+   835  000130  0E00               	movlw	0
+   836  000132  6E14               	movwf	runHardverCheck@helper_29+1,c
+   837  000134  0E00               	movlw	0
+   838  000136  6E13               	movwf	runHardverCheck@helper_29,c
+   839  000138  5014               	movf	runHardverCheck@helper_29+1,w,c
+   840  00013A  0A80               	xorlw	128
+   841  00013C  0F80               	addlw	-128
+   842  00013E  0E02               	movlw	2
+   843  000140  B4D8               	btfsc	status,2,c
+   844  000142  5C13               	subwf	runHardverCheck@helper_29,w,c
+   845  000144  B0D8               	btfsc	status,0,c
+   846  000146  D008               	goto	l679
+   847                           
+   848                           ;HardverTest.c: 20: {
+   849                           ;HardverTest.c: 21: delay();
+   850  000148  ECFF  F000         	call	_delay	;wreg free
+   851                           
+   852                           ;HardverTest.c: 23: PORTD = PORTD >> 1;
+   853  00014C  90D8               	bcf	status,0,c
+   854  00014E  3083               	rrcf	3971,w,c	;volatile
+   855  000150  6E83               	movwf	3971,c	;volatile
+   856  000152  4A13               	infsnz	runHardverCheck@helper_29,f,c
+   857  000154  2A14               	incf	runHardverCheck@helper_29+1,f,c
+   858  000156  D7F0               	goto	L4
+   859  000158                     l679:
+   860                           
+   861                           ;HardverTest.c: 24: }
+   862                           ;HardverTest.c: 26: delay();
+   863  000158  ECFF  F000         	call	_delay	;wreg free
+   864                           
+   865                           ;HardverTest.c: 28: PORTD = 0b101;
+   866  00015C  0E05               	movlw	5
+   867  00015E  6E83               	movwf	3971,c	;volatile
+   868                           
+   869                           ;HardverTest.c: 30: delay();
+   870  000160  ECFF  F000         	call	_delay	;wreg free
+   871                           
+   872                           ;HardverTest.c: 32: PORTD = 0b010;
+   873  000164  0E02               	movlw	2
+   874  000166  6E83               	movwf	3971,c	;volatile
+   875                           
+   876                           ;HardverTest.c: 34: delay();
+   877  000168  ECFF  F000         	call	_delay	;wreg free
+   878                           
+   879                           ;HardverTest.c: 36: PORTD = 0b101;
+   880  00016C  0E05               	movlw	5
+   881  00016E  6E83               	movwf	3971,c	;volatile
+   882                           
+   883                           ;HardverTest.c: 38: delay();
+   884  000170  ECFF  F000         	call	_delay	;wreg free
+   885                           
+   886                           ;HardverTest.c: 40: PORTD = 0;
+   887  000174  0E00               	movlw	0
+   888  000176  6E83               	movwf	3971,c	;volatile
+   889  000178  0012               	return	
+   890  00017A                     __end_of_runHardverCheck:
+   891                           	opt stack 0
+   892                           pclatu	equ	0xFFB
+   893                           pclath	equ	0xFFA
+   894                           tblptru	equ	0xFF8
+   895                           tblptrh	equ	0xFF7
+   896                           tblptrl	equ	0xFF6
+   897                           tablat	equ	0xFF5
+   898                           prodh	equ	0xFF4
+   899                           prodl	equ	0xFF3
+   900                           intcon	equ	0xFF2
+   901                           intcon2	equ	0xFF1
+   902                           fsr0h	equ	0xFEA
+   903                           fsr0l	equ	0xFE9
+   904                           fsr1h	equ	0xFE2
+   905                           fsr1l	equ	0xFE1
+   906                           fsr2h	equ	0xFDA
+   907                           fsr2l	equ	0xFD9
+   908                           status	equ	0xFD8
+   909                           
+   910 ;; *************** function _delay *****************
+   911 ;; Defined at:
+   912 ;;		line 67 in file "HardverTest.c"
+   913 ;; Parameters:    Size  Location     Type
+   914 ;;		None
+   915 ;; Auto vars:     Size  Location     Type
+   916 ;;  delay           2   14[COMRAM] int 
+   917 ;; Return value:  Size  Location     Type
+   918 ;;		None               void
+   919 ;; Registers used:
+   920 ;;		wreg, status,2, status,0
+   921 ;; Tracked objects:
+   922 ;;		On entry : 0/0
+   923 ;;		On exit  : 0/0
+   924 ;;		Unchanged: 0/0
+   925 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   926 ;;      Params:         0       0       0       0       0       0       0
+   927 ;;      Locals:         2       0       0       0       0       0       0
+   928 ;;      Temps:          0       0       0       0       0       0       0
+   929 ;;      Totals:         2       0       0       0       0       0       0
+   930 ;;Total ram usage:        2 bytes
+   931 ;; Hardware stack levels used:    1
+   932 ;; Hardware stack levels required when called:    1
+   933 ;; This function calls:
+   934 ;;		Nothing
+   935 ;; This function is called by:
+   936 ;;		_runHardverCheck
+   937 ;;		_runHardverTest
+   938 ;; This function uses a non-reentrant model
+   939 ;;
+   940                           
+   941                           	psect	text6
+   942  0001FE                     __ptext6:
+   943                           	opt stack 0
+   944  0001FE                     _delay:
+   945                           	opt stack 28
+   946                           
+   947                           ;HardverTest.c: 68: for(int delay = 0; delay <= 5000; delay++)
+   948                           
+   949                           ;incstack = 0
+   950                           ;incstack = 0
+   951  0001FE  0E00               	movlw	0
+   952  000200  6E10               	movwf	delay@delay+1,c
+   953  000202  0E00               	movlw	0
+   954  000204  6E0F               	movwf	delay@delay,c
+   955  000206  5010               	movf	delay@delay+1,w,c
+   956  000208  0A80               	xorlw	128
+   957  00020A  0F6D               	addlw	-147
+   958  00020C  0E89               	movlw	137
+   959  00020E  B4D8               	btfsc	status,2,c
+   960  000210  5C0F               	subwf	delay@delay,w,c
+   961  000212  B0D8               	btfsc	status,0,c
+   962  000214  0012               	return	
+   963                           
+   964                           ;HardverTest.c: 69: {}
+   965  000216  4A0F               	infsnz	delay@delay,f,c
+   966  000218  2A10               	incf	delay@delay+1,f,c
+   967  00021A  D7F5               	goto	L5
+   968  00021C                     __end_of_delay:
+   969                           	opt stack 0
+   970                           pclatu	equ	0xFFB
+   971                           pclath	equ	0xFFA
+   972                           tblptru	equ	0xFF8
+   973                           tblptrh	equ	0xFF7
+   974                           tblptrl	equ	0xFF6
+   975                           tablat	equ	0xFF5
+   976                           prodh	equ	0xFF4
+   977                           prodl	equ	0xFF3
+   978                           intcon	equ	0xFF2
+   979                           intcon2	equ	0xFF1
+   980                           fsr0h	equ	0xFEA
+   981                           fsr0l	equ	0xFE9
+   982                           fsr1h	equ	0xFE2
+   983                           fsr1l	equ	0xFE1
+   984                           fsr2h	equ	0xFDA
+   985                           fsr2l	equ	0xFD9
+   986                           status	equ	0xFD8
+   987                           pclatu	equ	0xFFB
+   988                           pclath	equ	0xFFA
+   989                           tblptru	equ	0xFF8
+   990                           tblptrh	equ	0xFF7
+   991                           tblptrl	equ	0xFF6
+   992                           tablat	equ	0xFF5
+   993                           prodh	equ	0xFF4
+   994                           prodl	equ	0xFF3
+   995                           intcon	equ	0xFF2
+   996                           intcon2	equ	0xFF1
+   997                           fsr0h	equ	0xFEA
+   998                           fsr0l	equ	0xFE9
+   999                           fsr1h	equ	0xFE2
+  1000                           fsr1l	equ	0xFE1
+  1001                           fsr2h	equ	0xFDA
+  1002                           fsr2l	equ	0xFD9
+  1003                           status	equ	0xFD8
+  1004                           
+  1005                           	psect	rparam
+  1006  0000                     pclatu	equ	0xFFB
+  1007                           pclath	equ	0xFFA
+  1008                           tblptru	equ	0xFF8
+  1009                           tblptrh	equ	0xFF7
+  1010                           tblptrl	equ	0xFF6
+  1011                           tablat	equ	0xFF5
+  1012                           prodh	equ	0xFF4
+  1013                           prodl	equ	0xFF3
+  1014                           intcon	equ	0xFF2
+  1015                           intcon2	equ	0xFF1
+  1016                           fsr0h	equ	0xFEA
+  1017                           fsr0l	equ	0xFE9
+  1018                           fsr1h	equ	0xFE2
+  1019                           fsr1l	equ	0xFE1
+  1020                           fsr2h	equ	0xFDA
+  1021                           fsr2l	equ	0xFD9
+  1022                           status	equ	0xFD8
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         2
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95     27      29
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMRAM
+
+    _main->_runHardverCheck
+    _main->_runHardverTest
+    _runHardverTest->_delay
+    _runHardverCheck->_delay
+
+Critical Paths under _ISR in COMRAM
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _ISR in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _ISR in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _ISR in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _ISR in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _ISR in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Critical Paths under _ISR in BANK5
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 7     2      5     225
+                                             20 COMRAM     7     2      5
+                    _runHardverCheck
+                     _runHardverTest
+                           _initINT0
+                           _initLEDs
+                    _setOSCFrequency
+ ---------------------------------------------------------------------------------
+ (1) _setOSCFrequency                                      3     1      2      30
+                                             14 COMRAM     3     1      2
+ ---------------------------------------------------------------------------------
+ (1) _initLEDs                                             0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _initINT0                                             0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _runHardverTest                                       4     4      0      90
+                                             16 COMRAM     4     4      0
+                              _delay
+ ---------------------------------------------------------------------------------
+ (1) _runHardverCheck                                      4     4      0      90
+                                             16 COMRAM     4     4      0
+                              _delay
+ ---------------------------------------------------------------------------------
+ (2) _delay                                                2     2      0      30
+                                             14 COMRAM     2     2      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (3) _ISR                                                 14    14      0       0
+                                              0 COMRAM    14    14      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 3
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _runHardverCheck
+     _delay
+   _runHardverTest
+     _delay
+   _initINT0
+   _initLEDs
+   _setOSCFrequency
+
+ _ISR (ROOT)
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BIGRAM             5FF      0       0      17        0.0%
+EEDATA             100      0       0       0        0.0%
+BITBANK5           100      0       0      16        0.0%
+BANK5              100      0       0      14        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITCOMRAM           5F      0       0       0        0.0%
+COMRAM              5F     1B      1D       1       30.5%
+BITSFR               0      0       0      40        0.0%
+SFR                  0      0       0      40        0.0%
+STACK                0      0       2       2        0.0%
+NULL                 0      0       0       0        0.0%
+ABS                  0      0      1D      15        0.0%
+DATA                 0      0      1F       3        0.0%
+CODE                 0      0       0       0        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V1.21 build 54009 
+Symbol Table                                                                                   Sun Nov 17 19:34:15 2013
+
+                      l74 00C8                        l66 0084                       l715 01AA  
+                     l751 008C                       l665 0130                       l761 00BE  
+                     l753 0096                       l755 00A0                       l747 01F8  
+                     l757 00AA                       l765 00D0                       l679 0158  
+                     l759 00B4                       _ISR 0008              __CFG_LVP$OFF 000000  
+                    ?_ISR 0001                      i2l60 0040             _freqGlobalInt 001C  
+                    _main 01D2                      fsr0h 000FEA                      fsr1h 000FE2  
+                    fsr0l 000FE9                      fsr2h 000FDA                      fsr1l 000FE1  
+                    fsr2l 000FD9                      pclat 000FFA                      prodh 000FF4  
+                    prodl 000FF3                      start 007A                     ??_ISR 0001  
+                   ?_main 0015                     _PORTD 000F83                     _TRISD 000F95  
+                   _delay 01FE                     tablat 000FF5                     status 000FD8  
+         __initialization 021C              __end_of_main 01FE                    ??_main 001A  
+__size_of_setOSCFrequency 0086             __activetblptr 000002          ??_runHardverTest 0011  
+__size_of_runHardverCheck 0076                    ?_delay 0001            __CFG_WDTEN$OFF 000000  
+        __end_of_initINT0 0242          __end_of_initLEDs 0236                    tblptrh 000FF7  
+                  tblptrl 000FF6                    tblptru 000FF8             main@startFreq 001B  
+              __accesstop 0060   __end_of__initialization 0220           __CFG_PBADEN$OFF 000000  
+          __pcstackCOMRAM 0001             __end_of_delay 021C         ??_setOSCFrequency 0011  
+                 ??_delay 000F         ??_runHardverCheck 0011                 ?_initINT0 0001  
+               ?_initLEDs 0001                   __Hparam 0000                   __Lparam 0000  
+                 __pcinit 021C                   __ramtop 0600                   __ptext0 01D2  
+                 __ptext1 007E                   __ptext2 022A                   __ptext3 0236  
+                 __ptext4 017A                   __ptext5 0104                   __ptext6 01FE  
+            __size_of_ISR 0072                delay@delay 000F      end_of_initialization 0220  
+              ??_initINT0 000F                ??_initLEDs 000F     runHardverCheck@helper 0011  
+           __Lmediumconst 0000   runHardverTest@helper_32 0013           _setOSCFrequency 007E  
+         _runHardverCheck 0104      runHardverTest@helper 0011       start_initialization 021C  
+             __end_of_ISR 007A   __size_of_runHardverTest 0058  runHardverCheck@helper_29 0013  
+             __pbssCOMRAM 001C         __size_of_initINT0 000C         __size_of_initLEDs 000C  
+ __end_of_setOSCFrequency 0104                 __pintcode 0008   __end_of_runHardverCheck 017A  
+       setOSCFrequency@ii 0011            __size_of_delay 001E               _INTCON2bits 000FF1  
+          _runHardverTest 017A                  __Hrparam 0000          ?_setOSCFrequency 000F  
+                __Lrparam 0000          ?_runHardverCheck 0001    __end_of_runHardverTest 01D2  
+ setOSCFrequency@frequenc 000F                  _initINT0 0236                  _initLEDs 022A  
+           __size_of_main 002C                  main@argc 0015                  main@argv 0017  
+              _INTCONbits 000FF2           ?_runHardverTest 0001                  intlevel2 0000  
+              _OSCCONbits 000FD3         __CFG_FOSC$INTIO67 000000  

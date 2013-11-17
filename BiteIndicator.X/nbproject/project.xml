@@ -6,9 +6,9 @@
             <name>BiteIndicator</name>
             <creation-uuid>df8d9442-1b3c-4f19-93ae-3d1df80ac1b7</creation-uuid>
             <make-project-type>0</make-project-type>
-            <c-extensions/>
+            <c-extensions>c</c-extensions>
             <cpp-extensions/>
-            <header-extensions/>
+            <header-extensions>h</header-extensions>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
         </data>
